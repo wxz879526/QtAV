@@ -12,6 +12,7 @@ INCLUDE(CheckTypeSize)
 include_directories(${QTDIR}/include) #TODO: remove. use external/include
 get_filename_component(QTDIR "${QTDIR}" ABSOLUTE)
 
+list(APPEND EXTRA_INCLUDE ${QTAV_SOURCE_DIR}/include)
 list(APPEND EXTRA_INCLUDE ${QTAV_SOURCE_DIR}/external/include)
 list(APPEND EXTRA_LIBS ${CMAKE_LIBRARY_PATH_FLAG}${QTAV_SOURCE_DIR}/external/lib)
 if(APPLE)
@@ -187,7 +188,7 @@ endif()
 
 set(HAVE_EGL 0)
 set(DYNAMIC_GL 0)
-set(OPENGL 0)     #desktop opengl only
+set(OPENGL 1)     #desktop opengl only
 set(OPENGLES 0)   #glesv2 only
 set(HAVE_OPENGL 1) # qt with opengl enabled. 1 of DYNAMIC_GL, OPENGL and OPENGLES is true
 #get_target_property(QtGui_location Qt5::Gui LOCATION) #dll path
