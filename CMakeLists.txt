@@ -20,6 +20,36 @@ endif()
 set(CMAKE_CXX_VISIBILITY_PRESET hidden) #use with -fdata-sections -ffunction-sections to reduce target size
 set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
 
+if(WIN32)
+	if (QTDIR OR DEFINED ENV{QTDIR} OR DEFINED ENV{QTDIR32} OR DEFINED ENV{QTDIR64})
+		# Qt path set by user or env var
+	else()
+		set(QTDIR "" CACHE PATH "Path to Qt (e.g. C:/Qt/5.7/msvc2015_64)")
+		message(WARNING "QTDIR variable is missing.  Please set this variable to specify path to Qt (e.g. C:/Qt/5.7/msvc2015_64)")
+	endif()
+endif()
+
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+	set(_lib_suffix 64)
+else()
+	set(_lib_suffix 32)
+endif()
+
+#message(WARNING $ENV{QTDIR${_lib_suffix}})
+if(DEFINED QTDIR${_lib_suffix})
+	list(APPEND CMAKE_PREFIX_PATH "${QTDIR${_lib_suffix}}")
+	#message(WARNING "111111")
+elseif(DEFINED QTDIR)
+	list(APPEND CMAKE_PREFIX_PATH "${QTDIR}")
+	#message(WARNING "2222")
+elseif(DEFINED ENV{QTDIR${_lib_suffix}})
+	list(APPEND CMAKE_PREFIX_PATH "$ENV{QTDIR${_lib_suffix}}")
+	#message(WARNING "33333")
+elseif(DEFINED ENV{QTDIR})
+	list(APPEND CMAKE_PREFIX_PATH "$ENV{QTDIR}")
+	#message(STATUS "appxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+endif()
+
 
 option(BUILD_EXAMPLES "Build examples" ON)
 option(BUILD_PLAYERS "Build players" ON)
