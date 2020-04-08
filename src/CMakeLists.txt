@@ -12,16 +12,9 @@ INCLUDE(CheckTypeSize)
 include_directories(${QTDIR}/include) #TODO: remove. use external/include
 get_filename_component(QTDIR "${QTDIR}" ABSOLUTE)
 
-<<<<<<< HEAD
-list(APPEND EXTRA_INCLUDE ${QTAV_SOURCE_DIR}/include)
-=======
 find_package(PkgConfig)
 
-<<<<<<< HEAD
->>>>>>> d4ca5dfe... cmake: Use pkg-config for finding libav libraries
-=======
 list(APPEND EXTRA_INCLUDE ${QTAV_SOURCE_DIR}/include)
->>>>>>> d7f65f2f... use desktop opengl
 list(APPEND EXTRA_INCLUDE ${QTAV_SOURCE_DIR}/external/include)
 list(APPEND EXTRA_LIBS ${CMAKE_LIBRARY_PATH_FLAG}${QTAV_SOURCE_DIR}/external/lib)
 if(APPLE)
