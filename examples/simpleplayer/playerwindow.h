@@ -33,12 +33,13 @@ class PlayerWindow : public QWidget
     Q_OBJECT
 public:
     explicit PlayerWindow(QWidget *parent = 0);
-public Q_SLOTS:
+
+private Q_SLOTS:
     void openMedia();
     void seekBySlider(int value);
     void seekBySlider();
     void playPause();
-private Q_SLOTS:
+
     void updateSlider(qint64 value);
     void updateSlider();
     void updateSliderUnit();

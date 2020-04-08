@@ -43,9 +43,11 @@ PlayerWindow::PlayerWindow(QWidget *parent) : QWidget(parent)
     vl->addWidget(m_vo->widget());
     m_slider = new QSlider();
     m_slider->setOrientation(Qt::Horizontal);
-    connect(m_slider, SIGNAL(sliderMoved(int)), SLOT(seekBySlider(int)));
-    connect(m_slider, SIGNAL(sliderPressed()), SLOT(seekBySlider()));
-    connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider(qint64)));
+	//connect(m_slider, QOverload<int>::of(&QSlider::sliderMoved), this, QOverload<int>::of(&PlayerWindow::seekBySlider));
+    //connect(m_slider, &QSlider::sliderPressed, this, QOverload<>::of(&PlayerWindow::seekBySlider));
+	connect(m_slider, SIGNAL(sliderMoved(int)), SLOT(seekBySlider(int)));
+	connect(m_slider, SIGNAL(sliderPressed()), SLOT(seekBySlider()));
+	connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(updateSlider(qint64)));
     connect(m_player, SIGNAL(started()), SLOT(updateSlider()));
     connect(m_player, SIGNAL(notifyIntervalChanged()), SLOT(updateSliderUnit()));
 
